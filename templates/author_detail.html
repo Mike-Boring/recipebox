@@ -8,13 +8,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <div class="container">
-    <h2>Hello Chefs! Welcome to our Recipe Box!</h2>
-    <ul>
-    {% for post in recipes %}
-    <li>
-        <a href="/recipe/{{ post.id }}">{{ post.title }}</a> - {{ post.description }}
-        - {{ post.author.name}}
-    </li>
-    {% endfor %}
-    </ul>
+  {% if not author %}
+  <h1>The author you are looking for does not exist.</h1>
+  {% else %}
+  <h2>{{ author.name }}</h2>
+  <h4>Bio: {{ author.bio }}</h4>
+  {% endif %}
 </div>
