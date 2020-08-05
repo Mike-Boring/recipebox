@@ -12,8 +12,7 @@
     <ul>
     {% for post in recipes %}
     <li>
-        <a href="/recipe/{{ post.id }}">{{ post.title }}</a> - {{ post.description }}
-        - {{ post.author.name}}
+        <a href="/recipe/{{ post.id }}">{{ post.title }}</a>
     </li>
     {% endfor %}
     </ul>

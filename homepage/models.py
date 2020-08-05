@@ -24,7 +24,7 @@ class Author(models.Model):
     bio = models.TextField()
 
     def __str__(self):
-        return f'{self.name} - {self.bio} - {self.id}'
+        return f'{self.name}'
 
 class Recipe(models.Model):
     title = models.CharField(max_length=50)
@@ -34,5 +34,5 @@ class Recipe(models.Model):
     instructions = models.TextField()
 
     def __str__(self):
-        return f'{self.title} - {self.description} - {self.author}'
+        return f'{self.title} - {self.description} - {self.author.name}'
 
