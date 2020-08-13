@@ -1,9 +1,11 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 from homepage.models import Recipe, Author
 
 from homepage.forms import RecipeForm, AuthorForm, LoginForm
+
 
 # Create your views here.
 
@@ -25,6 +27,7 @@ def author_detail(request, author_id):
     return render(request, "author_detail.html", {"author": selected_author, "recipes": author_recipes})
 
 
+@login_required
 def recipe_form_view(request):
     if request.method == "POST":
         form = RecipeForm(request.POST)
@@ -43,6 +46,7 @@ def recipe_form_view(request):
     return render(request, "generic_form.html", {"form": form})
 
 
+@login_required
 def author_form_view(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
@@ -75,7 +79,7 @@ def logout_view(request):
 
 # from django.shortcuts import render, HttpResponseRedirect, reverse
 
-# from django.contrib.auth.decorators import login_required
+
 # from django.contrib.auth.models import User
 # from homepage.models import Recipe, Author
 
