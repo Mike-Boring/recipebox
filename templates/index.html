@@ -9,6 +9,8 @@
 
 <div class="container">
     <h2>Hello Chefs! Welcome to our Recipe Box!</h2>
+    <h4>Am I authenticated?: {{ request.user.is_authenticated }}</h4>
+    <br>
     <ul>
     {% for post in recipes %}
     <li>
