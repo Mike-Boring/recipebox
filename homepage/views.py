@@ -39,7 +39,7 @@ def recipe_form_view(request):
             if request.user.is_staff:
                 new_recipe = Recipe.objects.create(
                     title=data.get('title'),
-                    author=Author.objects.all(),
+                    user=data.get('user'),
                     description=data.get('description'),
                     time_required=data.get('time_required'),
                     instructions=data.get('instructions')
