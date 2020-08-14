@@ -36,15 +36,6 @@ def recipe_form_view(request):
         if form.is_valid():
             data = form.cleaned_data
             # breakpoint()
-            if request.user.is_staff:
-                new_recipe = Recipe.objects.create(
-                    title=data.get('title'),
-                    user=data.get('user'),
-                    description=data.get('description'),
-                    time_required=data.get('time_required'),
-                    instructions=data.get('instructions')
-                )
-                return HttpResponseRedirect(reverse("recipeview", args=[new_recipe.id]))
             new_recipe = Recipe.objects.create(
                 title=data.get('title'),
                 author=request.user.author,
