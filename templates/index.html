@@ -8,10 +8,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <div class="container">
+    <br>
+    <div align="right">
+        <a href="/login/" class="btn btn-primary">Login</a>&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>
+    </div>
     <h2>Hello Chefs! Welcome to our Recipe Box!</h2>
-    <h4>Am I authenticated?: {{ request.user.is_authenticated }}</h4>
+    {% comment %} <h4>Am I authenticated?: {{ request.user.is_authenticated }}</h4> {% endcomment %}
     {%  if request.user.is_authenticated %}
-    <h4>{{ request.user.author }}, you are logged in.</h4>
+    <h4>Welcome, {{ request.user.author }}, you are logged in.</h4>
     {% endif %}
     <br>
     <ul>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.contrib.auth.models import User
 
@@ -48,6 +48,7 @@ def recipe_form_view(request):
     return render(request, "generic_form.html", {"form": form})
 
 
+@user_passes_test(lambda u: u.is_superuser)
 @login_required
 def author_form_view(request):
     if request.method == "POST":
