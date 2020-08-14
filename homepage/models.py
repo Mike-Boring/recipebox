@@ -39,4 +39,4 @@ class Recipe(models.Model):
     instructions = models.TextField()
 
     def __str__(self):
-        return f'{self.title} - {self.description} - {self.author.name}'
+        return f'{self.title} - {self.description} - {self.author.username}'
