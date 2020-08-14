@@ -9,10 +9,10 @@ class RecipeForm(forms.Form):
     instructions = forms.CharField(widget=forms.Textarea)
 
 
-class AuthorForm(forms.ModelForm):
-    class Meta:
-        model = Author
-        fields = ["name", "bio"]
+class AuthorForm(forms.Form):
+    username = forms.CharField(max_length=240)
+    password = forms.CharField(widget=forms.PasswordInput)
+    bio = forms.CharField(widget=forms.Textarea)
 
 
 class LoginForm(forms.Form):
