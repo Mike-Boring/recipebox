@@ -15,15 +15,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from homepage.views import index, author_detail, recipe_detail, recipe_form_view, author_form_view, permission_error_view
+from homepage.views import index, author_detail, recipe_detail, add_recipe, add_author, permission_error_view
 
 from homepage import views
 
 urlpatterns = [
     path('', index, name="homepage"),
     path('recipe/<int:recipe_id>/', views.recipe_detail, name="recipeview"),
-    path('newrecipe/', views.recipe_form_view, name="newrecipe"),
-    path('newauthor/', views.author_form_view, name="newauthor"),
+    path('addrecipe/', views.add_recipe, name="addrecipe"),
+    path('addauthor/', views.add_author, name="addauthor"),
     path('author/<int:author_id>/', views.author_detail, name="authorview"),
     path('login/', views.login_view, name="loginview"),
     path('signup/', views.signup_view, name="signupview"),

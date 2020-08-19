@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from homepage.models import Recipe, Author
 
-from homepage.forms import RecipeForm, AuthorForm, LoginForm, SignupForm
+from homepage.forms import AddRecipeForm, AddAuthorForm, LoginForm, SignupForm
 
 
 # Create your views here.
@@ -30,9 +30,9 @@ def author_detail(request, author_id):
 
 
 @login_required
-def recipe_form_view(request):
+def add_recipe(request):
     if request.method == "POST":
-        form = RecipeForm(request.POST)
+        form = AddRecipeForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             # breakpoint()
@@ -45,16 +45,16 @@ def recipe_form_view(request):
             )
             return HttpResponseRedirect(reverse("recipeview", args=[new_recipe.id]))
 
-    form = RecipeForm()
+    form = AddRecipeForm()
     return render(request, "generic_form.html", {"form": form})
 
 
 # @ user_passes_test(lambda u: u.is_superuser)
 @ login_required
-def author_form_view(request):
+def add_author(request):
     if request.user.is_staff:
         if request.method == "POST":
-            form = AuthorForm(request.POST)
+            form = AddAuthorForm(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
                 new_user = User.objects.create_user(username=data.get(
@@ -64,7 +64,7 @@ def author_form_view(request):
                 login(request, new_user)
                 return HttpResponseRedirect(reverse("homepage"))
 
-        form = AuthorForm()
+        form = AddAuthorForm()
         return render(request, "generic_form.html", {"form": form})
     else:
         return render(request, "permission_error.html")
