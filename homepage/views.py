@@ -49,6 +49,17 @@ def add_recipe(request):
     return render(request, "generic_form.html", {"form": form})
 
 
+@login_required
+def editrecipe_view(request, recipe_id):
+    edit_recipe = Recipe.objects.filter(id=recipe_id).first()
+    if request.method == 'POST':
+        editrecipe_form = AddRecipeForm(request.POST, instance=edit_recipe)
+        editrecipe_form.save()
+        return HttpResponseRedirect(reverse('recipe_detail', args=[edit_recipe.id]))
+    editrecipe_form = AddRecipeForm(instance=edit_recipe)
+    return render(request, 'generic_form.html', {'form': editrecipe_form})
+
+
 # @ user_passes_test(lambda u: u.is_superuser)
 @ login_required
 def add_author(request):
