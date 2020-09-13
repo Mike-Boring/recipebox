@@ -40,3 +40,12 @@ class Recipe(models.Model):
 
     def __str__(self):
         return f'{self.title} - {self.description} - {self.author.username}'
+
+
+class FavoriteRecipesModel(models.Model):
+    chosen_by = models.ForeignKey(Author, on_delete=models.CASCADE)
+    favorite_recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.chosen_by}'
+        return f'{self.favorite_recipe}'

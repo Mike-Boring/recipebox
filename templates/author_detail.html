@@ -9,19 +9,28 @@
 
 <div class="container">
     {% if not author %}
-        <h1>The author you are looking for does not exist.</h1>
-        {% else %}
-        <h2>{{ author.username }}</h2>
-        <h4>Bio: {{ author.bio }}</h4>
-        <br>
-        <h2>{{ author.username }}'s Recipes</h2>
-        <ul>
+    <h1>The author you are looking for does not exist.</h1>
+    {% else %}
+    <h2>{{ author.username }}</h2>
+    <h4>Bio: {{ author.bio }}</h4>
+    <br>
+    <h2>{{ author.username }}'s Recipes</h2>
+    <ul>
         {% for post in recipes %}
         <li>
             <a href="/recipe/{{ post.id }}">{{ post.title }}</a> - {{ post.description }}
         </li>
         {% endfor %}
-        </ul>
+    </ul>
+    <br>
+    <h2>{{ author.username }}'s Favourites</h2>
+    <ul>
+        {% for favorite in favorites %}
+        <li>
+            <a href="/recipe/{{ recipe.favorite_recipe.id }}">{{ favorite_recipe }}</a>
+        </li>
+        {% endfor %}
+    </ul>
     {% endif %}
     <br>
     <a class="btn btn-primary" href='/' role="button">All Recipes</a>

@@ -13,19 +13,20 @@
         <a href="/login/" class="btn btn-primary">Login</a>&nbsp;<a href="/logout/" class="btn btn-primary">Logout</a>
     </div>
     <h2>Hello Chefs! Welcome to our Recipe Box!</h2>
-    {% comment %} <h4>Am I authenticated?: {{ request.user.is_authenticated }}</h4> {% endcomment %}
-    {%  if request.user.is_authenticated %}
+    {% comment %}
+    <h4>Am I authenticated?: {{ request.user.is_authenticated }}</h4> {% endcomment %} {% if request.user.is_authenticated %}
     <h4>Welcome, {{ request.user.author }}, you are logged in.</h4>
     {% endif %}
     <br>
     <ul>
-    {% for post in recipes %}
-    <li>
-        <a href="/recipe/{{ post.id }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
+        {% for post in recipes %}
+        <li>
+            <a href="/recipe/{{ post.id }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
     </ul>
     <br>
     <br>
     <a href="/addrecipe/" class="btn btn-primary">Add New Recipe</a>&nbsp;<a href="/addauthor/" class="btn btn-primary">Add New Author</a>
+    <a href="/editrecipe/{{ recipe_id }}" class="btn btn-primary">Edit Recipe</a>
 </div>
