@@ -15,7 +15,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from homepage.views import index, author_detail, recipe_detail, add_recipe, add_author, permission_error_view, editrecipe_view
+from homepage.views import index, author_detail, recipe_detail, add_recipe, add_author, permission_error_view, editrecipe_view, addfavoriterecipe_view
 
 from homepage import views
 
@@ -24,6 +24,7 @@ urlpatterns = [
     path('recipe/<int:recipe_id>/', views.recipe_detail, name="recipeview"),
     path('addrecipe/', views.add_recipe, name="addrecipe"),
     path('editrecipe/<int:recipe_id>/', views.editrecipe_view, name='editrecipe'),
+    path('addfavoriterecipe/<int:recipe_id>/', views.addfavoriterecipe_view, name='addfavoriterecipe'),
     path('addauthor/', views.add_author, name="addauthor"),
     path('author/<int:author_id>/', views.author_detail, name="authorview"),
     path('login/', views.login_view, name="loginview"),

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
 
-from homepage.models import Recipe, Author
+from homepage.models import Recipe, Author, FavoriteRecipesModel
 
 from homepage.forms import AddRecipeForm, AddAuthorForm, LoginForm, SignupForm
 
@@ -20,13 +20,19 @@ def index(request):
 def recipe_detail(request, recipe_id):
     my_recipe = Recipe.objects.filter(id=recipe_id).first()
     selected_author = Author.objects.filter(id=recipe_id).first()
-    return render(request, "recipe_detail.html", {"recipe": my_recipe, "author": selected_author})
+    whose_favoriterecipe = Author.objects.filter(user=request.user).first()
+    if FavoriteRecipesModel.objects.filter(chosen_by=whose_favoriterecipe):
+        favoriteby_user = True
+    else:
+        favoriteby_user = False
+    return render(request, "recipe_detail.html", {"recipe": my_recipe, "author": selected_author, 'user': favoriteby_user})
 
 
 def author_detail(request, author_id):
     selected_author = Author.objects.filter(id=author_id).first()
     author_recipes = Recipe.objects.filter(author=selected_author)
-    return render(request, "author_detail.html", {"author": selected_author, "recipes": author_recipes})
+    favorites_byselectedauthor = FavoriteRecipesModel.objects.filter(chosen_by=selected_author)
+    return render(request, "author_detail.html", {"author": selected_author, "recipes": author_recipes, 'favorites': favorites_byselectedauthor})
 
 
 @login_required
@@ -79,6 +85,13 @@ def add_author(request):
         return render(request, "generic_form.html", {"form": form})
     else:
         return render(request, "permission_error.html")
+
+
+def addfavoriterecipe_view(request, recipe_id):
+    selected_favoriterecipe = Recipe.objects.filter(id=recipe_id).first()
+    authorwho_favorited = Author.objects.filter(id=recipe_id).first()
+    FavoriteRecipesModel.object.create(recipe=selected_favoriterecipe, author=authorwho_favorited)
+    return HttpResponseRedirect(reverse('homepage'))
 
 
 def login_view(request):
